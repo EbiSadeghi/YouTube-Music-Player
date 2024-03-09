@@ -1,16 +1,19 @@
 import pyautogui
 import time
 import subprocess
+import platform
 
-def open_firefox(numTabs, link):
-    # Open Firefox  
-    for ii in range(numTabs):
-        subprocess.Popen(['firefox'])
+def get_os():
+    system == platform.system()
+    if system == "Windows":
+        return "Windows"
+    elif system == "Linux":
+        return "Linux"
+    else:
+        return "Unknown"
 
-    # Wait for Firefox to open
-    time.sleep(4)
-
-    # Open a webpage (replace 'https://www.example.com' with your desired URL)
+def open_webpage(numTabs, link):
+    # Open a webpage (replace link with your desired URL)
     for ii in range(numTabs):
         pyautogui.hotkey('alt', 'tab')
         time.sleep(0.5)
@@ -19,6 +22,27 @@ def open_firefox(numTabs, link):
         time.sleep(0.5)
     time.sleep(7)  # Wait for the page to load
 
+def open_firefox(numTabs, link):
+    os_type = platform.system()
+
+    # Open Firefox  
+    if os_type == "Linux":
+        for ii in range(numTabs):
+            subprocess.Popen(['firefox'])
+            
+        # Wait for Firefox to open
+        time.sleep(4)
+    elif os_type == "Windows":
+        for ii in range(numTabs):
+            pyautogui.hotkey('win','r') # Opens Run dialog
+            time.sleep(1)  # Wait for the dialog to open
+            pyautogui.write('firefox')  # Type 'firefox' into the dialog
+            pyautogui.press('enter')  # Press Enter to open Firefox
+            time.sleep(5)  # Wait for Firefox to open
+    else:
+        raise Exception("Unknown operating system, failed to open firefox")
+
+    open_webpage(numTabs, link)
 
 # Press number keys (1 to 9)
 def play_verse(myList):
