@@ -3,15 +3,6 @@ import time
 import subprocess
 import platform
 
-def get_os():
-    system == platform.system()
-    if system == "Windows":
-        return "Windows"
-    elif system == "Linux":
-        return "Linux"
-    else:
-        return "Unknown"
-
 def open_webpage(numTabs, link):
     # Open a webpage (replace link with your desired URL)
     for ii in range(numTabs):
